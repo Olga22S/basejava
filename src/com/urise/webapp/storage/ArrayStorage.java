@@ -10,19 +10,21 @@ public class ArrayStorage {
     private int size;
 
     public void clear() {
-        Arrays.fill(storage, 0, size-1, null);
+        for(int i =0;i<size;i++){
+            storage[i]=null;
+        }
         size = 0;
     }
 
 
-    public void save(Resume r) {
+    public void save(Resume resume) {
 
-        if (getIndex(r.getUuid()) != -1) {
-            System.out.println("Resume " + r.getUuid() + " already exists");
+        if (getIndex(resume.getUuid()) != -1) {
+            System.out.println("Resume " + resume.getUuid() + " already exists");
         } else if (size == storage.length) {
             System.out.println("Overflow");
         } else {
-            storage[size] = r;
+            storage[size] = resume;
             size++;
         }
     }
@@ -49,31 +51,28 @@ public class ArrayStorage {
     }
 
     public Resume[] getAll() {
-        Resume[] resume = Arrays.copyOf(storage, size);
-        return resume;
+        return Arrays.copyOf(storage, size);
     }
 
     public int size() {
         return size;
     }
 
-    public void update(Resume r) {
-        int index = getIndex(r.getUuid());
+    public void update(Resume resume) {
+        int index = getIndex(resume.getUuid());
         if(index==-1){
-            System.out.println("Resume " + r.getUuid() + " does not exist");
+            System.out.println("Resume " + resume.getUuid() + " does not exist");
         } else {
-            storage[index]=r;
+            storage[index]=resume;
         }
     }
 
     private int getIndex(String uuid) {
-
         for (int i = 0; i < size; i++) {
             if (storage[i].getUuid().contains(uuid)) {
                 return i;
             }
         }
-
         return -1;
     }
 }
