@@ -4,18 +4,16 @@ import com.urise.webapp.model.Resume;
 
 import java.util.Arrays;
 
-
 public class ArrayStorage {
     private Resume[] storage = new Resume[10000];
     private int size;
 
     public void clear() {
-        for(int i =0;i<size;i++){
-            storage[i]=null;
+        for (int i = 0; i < size; i++) {
+            storage[i] = null;
         }
         size = 0;
     }
-
 
     public void save(Resume resume) {
 
@@ -60,10 +58,10 @@ public class ArrayStorage {
 
     public void update(Resume resume) {
         int index = getIndex(resume.getUuid());
-        if(index==-1){
+        if (index == -1) {
             System.out.println("Resume " + resume.getUuid() + " does not exist");
         } else {
-            storage[index]=resume;
+            storage[index] = resume;
         }
     }
 
