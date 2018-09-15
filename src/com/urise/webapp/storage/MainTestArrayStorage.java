@@ -28,25 +28,12 @@ public class MainTestArrayStorage {
         printAll();
         ARRAY_STORAGE.delete(r1.getUuid());
         printAll();
+
         ARRAY_STORAGE.clear();
         printAll();
 
         System.out.println("Size: " + ARRAY_STORAGE.size());
-///////////////
-        Resume r4 = new Resume();
-        r4.setUuid("uuid4");
-        Resume r5 = new Resume();
-        r5.setUuid("uuid5");
-        Resume r6 = new Resume();
-        r6.setUuid("uuid6");
 
-        ARRAY_STORAGE.save(r4);
-        ARRAY_STORAGE.save(r5);
-        ARRAY_STORAGE.save(r6);
-        printAll();
-        r5.setUuid("resume5");
-        ARRAY_STORAGE.update(r5);
-        printAll();
     }
 
     static void printAll() {

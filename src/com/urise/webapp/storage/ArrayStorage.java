@@ -4,9 +4,7 @@ import com.urise.webapp.model.Resume;
 
 import java.util.Arrays;
 
-/**
- * Array based storage for Resumes
- */
+
 public class ArrayStorage {
     private Resume[] storage = new Resume[10000];
     private int size;
@@ -16,21 +14,6 @@ public class ArrayStorage {
         size = 0;
     }
 
-    public void update(Resume r) {
-        boolean b = true;
-        if (size != 0) {
-            for (int j = 0; j < size; j++) {
-                if (storage[j].getUuid().contains(r.getUuid())) {
-                    System.out.println("Resume exists!");
-                    storage[j] = r;
-                    b = false;
-                }
-            }
-        }
-        if (b) {
-            System.out.println("Resume does not exist!");
-        }
-    }
 
     public void save(Resume r) {
         boolean b = true;
@@ -38,14 +21,9 @@ public class ArrayStorage {
             System.out.println("Memory is full!");
             b = false;
         }
-        if (size != 0) {
-            for (int j = 0; j < size; j++) {
-                if (storage[j].getUuid().contains(r.getUuid())) {
-                    System.out.println("Resume exists!");
-                    b = false;
-                    break;
-                }
-            }
+        if (check(r.getUuid(), size) != null) {
+            b = false;
+            System.out.println("Resume exists!");
         }
         if (b) {
             storage[size] = r;
@@ -54,32 +32,32 @@ public class ArrayStorage {
     }
 
     public Resume get(String uuid) {
-        for (int j = 0; j < size; j++) {
-            if (storage[j].getUuid().contains(uuid)) {
-                return storage[j];
-            }
+        if (check(uuid, size) == null) {
+            System.out.println(uuid + " does not exist!");
         }
-        System.out.println(uuid + " does not exist!");
-        return null;
-
+        return check(uuid, size);
     }
 
+
     public void delete(String uuid) {
-        //check
+        boolean b = false;
         for (int j = 0; j < size; j++) {
+
             if (storage[j].getUuid().contains(uuid)) {
                 storage[j] = null;
+                b = true;
                 for (; j < size; j++) {
                     storage[j] = storage[j + 1];
                 }
             }
         }
-        size--;
+        if (b) {
+            size--;
+        } else {
+            System.out.println("Resume is not found!");
+        }
     }
 
-    /**
-     * @return array, contains only Resumes in storage (without null)
-     */
     public Resume[] getAll() {
         Resume[] resume = Arrays.copyOf(storage, size);
         return resume;
@@ -87,5 +65,25 @@ public class ArrayStorage {
 
     public int size() {
         return size;
+    }
+
+    public void update(Resume r) {
+        Resume resume;
+        if (check(r.getUuid(), size) != null) {
+            resume = r;
+        } else {
+            System.out.println("Resume is not found!");
+        }
+    }
+
+    private Resume check(String uuid, int size) {
+        if (size != 0) {
+            for (int j = 0; j < size; j++) {
+                if (storage[j].getUuid().contains(uuid)) {
+                    return storage[j];
+                }
+            }
+        }
+        return null;
     }
 }
