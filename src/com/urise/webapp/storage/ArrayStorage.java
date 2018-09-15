@@ -8,33 +8,63 @@ import java.util.Arrays;
  * Array based storage for Resumes
  */
 public class ArrayStorage {
-   private Resume[] storage = new Resume[10000];
+    private Resume[] storage = new Resume[10000];
     private int size;
 
-   public void clear() {
+    public void clear() {
         Arrays.fill(storage, 0, size, null);
         size = 0;
     }
-    public void update(Resume r){
 
+    public void update(Resume r) {
+        boolean b = true;
+        if (size != 0) {
+            for (int j = 0; j < size; j++) {
+                if (storage[j].getUuid().contains(r.getUuid())) {
+                    System.out.println("Resume exists!");
+                    storage[j] = r;
+                    b = false;
+                }
+            }
+        }
+        if (b) {
+            System.out.println("Resume does not exist!");
+        }
     }
 
     public void save(Resume r) {
-        //check
-        storage[size] = r;
-        size++;
+        boolean b = true;
+        if (size == storage.length) {
+            System.out.println("Memory is full!");
+            b = false;
+        }
+        if (size != 0) {
+            for (int j = 0; j < size; j++) {
+                if (storage[j].getUuid().contains(r.getUuid())) {
+                    System.out.println("Resume exists!");
+                    b = false;
+                    break;
+                }
+            }
+        }
+        if (b) {
+            storage[size] = r;
+            size++;
+        }
     }
 
-   public Resume get(String uuid) {
+    public Resume get(String uuid) {
         for (int j = 0; j < size; j++) {
             if (storage[j].getUuid().contains(uuid)) {
                 return storage[j];
             }
         }
+        System.out.println(uuid + " does not exist!");
         return null;
+
     }
 
-   public void delete(String uuid) {
+    public void delete(String uuid) {
         //check
         for (int j = 0; j < size; j++) {
             if (storage[j].getUuid().contains(uuid)) {
@@ -50,12 +80,12 @@ public class ArrayStorage {
     /**
      * @return array, contains only Resumes in storage (without null)
      */
-   public Resume[] getAll() {
+    public Resume[] getAll() {
         Resume[] resume = Arrays.copyOf(storage, size);
         return resume;
     }
 
-   public int size() {
+    public int size() {
         return size;
     }
 }
