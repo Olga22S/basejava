@@ -1,3 +1,5 @@
+package com.urise.webapp;
+
 import com.urise.webapp.model.Resume;
 import com.urise.webapp.storage.ArrayStorage;
 
@@ -37,9 +39,9 @@ public class MainTestArrayStorage {
         ARRAY_STORAGE.save(r2);
         ARRAY_STORAGE.save(r3);
         printAll();
-        r1.setUuid("resume1");
-        r3.setUuid("resume2");
+
         ARRAY_STORAGE.update(r1);
+        ARRAY_STORAGE.update(r2);
         ARRAY_STORAGE.update(r3);
         printAll();
     }
