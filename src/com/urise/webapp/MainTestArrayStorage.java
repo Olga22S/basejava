@@ -12,11 +12,11 @@ public class MainTestArrayStorage {
     static final AbstractArrayStorage ARRAY_STORAGE = new SortedArrayStorage();
 
     public static void main(String[] args) {
-       final Resume r1 = new Resume();
+        final Resume r1 = new Resume();
         r1.setUuid("uuid1");
-       final Resume r2 = new Resume();
+        final Resume r2 = new Resume();
         r2.setUuid("uuid2");
-       final Resume r3 = new Resume();
+        final Resume r3 = new Resume();
         r3.setUuid("uuid3");
         final Resume r4 = new Resume();
         r4.setUuid("uuid4");
@@ -32,9 +32,9 @@ public class MainTestArrayStorage {
         System.out.println("Get dummy: " + ARRAY_STORAGE.get("dummy"));
 
         printAll();
-       ARRAY_STORAGE.delete(r2.getUuid());
-       printAll();
-       ARRAY_STORAGE.delete(r4.getUuid());
+        ARRAY_STORAGE.delete(r2.getUuid());
+        printAll();
+        ARRAY_STORAGE.delete(r4.getUuid());
         printAll();
 
         ARRAY_STORAGE.update(r1);

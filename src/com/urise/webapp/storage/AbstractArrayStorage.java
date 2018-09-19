@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 public abstract class AbstractArrayStorage implements Storage {
 
-    protected static final int STORAGE_LIMIT = 10000;
+    protected static final int STORAGE_LIMIT = 10_000;
     protected Resume[] storage = new Resume[STORAGE_LIMIT];
     protected int size;
 
@@ -31,7 +31,7 @@ public abstract class AbstractArrayStorage implements Storage {
         } else if (size == STORAGE_LIMIT) {
             System.out.println("Overflow");
         } else {
-            InsertElement(resume, index);
+            insertIndex(resume, index);
             size++;
         }
     }
@@ -47,13 +47,11 @@ public abstract class AbstractArrayStorage implements Storage {
         }
     }
 
-    @Override
     public void clear() {
         Arrays.fill(storage, 0, size, null);
         size = 0;
     }
 
-    @Override
     public void update(Resume resume) {
         int index = getIndex(resume.getUuid());
         if (index < 0) {
@@ -71,5 +69,5 @@ public abstract class AbstractArrayStorage implements Storage {
 
     protected abstract void fillDeletedElement(int index);
 
-    protected abstract void InsertElement(Resume resume, int index);
+    protected abstract void insertIndex(Resume resume, int index);
 }
