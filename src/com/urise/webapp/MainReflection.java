@@ -19,7 +19,6 @@ public class MainReflection {
         System.out.println(resume);
 
         Method method = resume.getClass().getDeclaredMethod("toString");
-        method.setAccessible(true);
         System.out.println(method.invoke(resume));
     }
 }
