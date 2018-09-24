@@ -72,7 +72,7 @@ public abstract class AbstractArrayStorageTest {
                 storage.save(new Resume());
             }
         } catch (StorageException e) {
-            Assert.fail();
+            Assert.fail("StorageException error");
         }
         storage.save(new Resume());
     }
