@@ -6,15 +6,15 @@ import com.urise.webapp.model.Resume;
 
 public abstract class AbstractStorage implements Storage {
 
+    protected abstract Object getSearchKey(String uuid);
+
+    protected abstract boolean isExist(Object searchKey);
+
     protected abstract Resume doGet(Object searchKey);
 
     protected abstract void doSave(Resume resume, Object searchKey);
 
-    protected abstract boolean isExist(Object searchKey);
-
     protected abstract void doUpdate(Resume resume, Object searchKey);
-
-    protected abstract Object getSearchKey(String uuid);
 
     protected abstract void doDelete(Object searchKey);
 
