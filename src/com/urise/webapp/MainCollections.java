@@ -1,9 +1,6 @@
 package com.urise.webapp;
 
 import com.urise.webapp.model.Resume;
-import com.urise.webapp.storage.AbstractStorage;
-import com.urise.webapp.storage.ListStorage;
-import com.urise.webapp.storage.MapStorage;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -21,40 +18,25 @@ public class MainCollections {
     private static final Resume RESUME_3 = new Resume(UUID_3);
     private static final Resume RESUME_4 = new Resume(UUID_4);
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
 
         Collection<Resume> collection = new ArrayList<>();
         collection.add(RESUME_1);
         collection.add(RESUME_2);
         collection.add(RESUME_3);
 
-        for(Resume r: collection){
-       //     System.out.println(r);
+        for (Resume r : collection) {
+            //     System.out.println(r);
         }
         Iterator<Resume> iterator = collection.iterator();
-        while (iterator.hasNext()){
+        while (iterator.hasNext()) {
             Resume r = iterator.next();
-          //  System.out.println(r);
-            if(Objects.equals(r.getUuid(),UUID_1)){
+            //  System.out.println(r);
+            if (Objects.equals(r.getUuid(), UUID_1)) {
                 iterator.remove();
             }
         }
-      //  System.out.println(collection.toString());
+        System.out.println(collection.toString());
 
-        AbstractStorage storage = new ListStorage();
-        storage.save(RESUME_1);
-        storage.save(RESUME_2);
-        storage.save(RESUME_4);
-        System.out.println(storage.get(UUID_1));
-        storage.delete(UUID_1);
-        //storage.getAll();
-
-      // System.out.println(storage.getAll().toString());
-        MapStorage mstorage = new MapStorage();
-        mstorage.save(RESUME_1);
-        mstorage.save(RESUME_2);
-        mstorage.save(RESUME_3);
-        System.out.println(mstorage.getAll());
     }
-
 }
