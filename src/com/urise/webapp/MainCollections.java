@@ -1,6 +1,9 @@
 package com.urise.webapp;
 
 import com.urise.webapp.model.Resume;
+import com.urise.webapp.storage.AbstractStorage;
+import com.urise.webapp.storage.ListStorage;
+import com.urise.webapp.storage.MapStorage;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -26,7 +29,7 @@ public class MainCollections {
         collection.add(RESUME_3);
 
         for(Resume r: collection){
-            System.out.println(r);
+       //     System.out.println(r);
         }
         Iterator<Resume> iterator = collection.iterator();
         while (iterator.hasNext()){
@@ -36,7 +39,22 @@ public class MainCollections {
                 iterator.remove();
             }
         }
-        System.out.println(collection.toString());
+      //  System.out.println(collection.toString());
+
+        AbstractStorage storage = new ListStorage();
+        storage.save(RESUME_1);
+        storage.save(RESUME_2);
+        storage.save(RESUME_4);
+        System.out.println(storage.get(UUID_1));
+        storage.delete(UUID_1);
+        //storage.getAll();
+
+      // System.out.println(storage.getAll().toString());
+        MapStorage mstorage = new MapStorage();
+        mstorage.save(RESUME_1);
+        mstorage.save(RESUME_2);
+        mstorage.save(RESUME_3);
+        System.out.println(mstorage.getAll());
     }
 
 }
